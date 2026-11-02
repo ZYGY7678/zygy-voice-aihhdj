@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: zygy-voice-aihhdj
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install && curl -fsSL -o yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux && chmod +x yt-dlp
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: EXT_PATH
+        value: "9"
+      - key: TEXT_MODEL
+        value: "gemini-3.6-flash"
+      - key: TTS_MODEL
+        value: "gemini-3.8-flash-tts"
+      - key: EXTENSIONS
+        value: "[{\"p\":\"9\",\"k\":\"song\",\"m\":\"1\",\"g\":\"ברוכים הבאים לשלוחת השירים אמור את שם הזמר ושם השיר ובסיום הקש סולמית\",\"x\":\"\"}]"
+      - key: MAX_WORDS
+        value: "25"
+      - key: EXTRA_INSTRUCTION
+        value: ""
+      - key: GEMINI_API_KEYS
+        sync: false
+      - key: YEMOT_TOKEN
+        sync: false
